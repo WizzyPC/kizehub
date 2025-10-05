@@ -16,7 +16,7 @@ local player = Players.LocalPlayer
 
 -- Tela principal
 local screenGui = Instance.new("ScreenGui", player:WaitForChild("PlayerGui"))
-screenGui.Name = "BloxFruitsHub"
+screenGui.Name = "Kize Hub | Blox Fruits [ BETA ]  By yKizera"
 screenGui.ResetOnSpawn = false
 
 -- Tema
@@ -172,4 +172,5 @@ OrionLib:MakeNotification({
     Time = 5
 
 })
+
 
