@@ -1,3 +1,5 @@
+local World1, World2, World3, TestWorld = false, false, false, false
+
 if game.PlaceId == 2753915549 then
     World1 = true
 elseif game.PlaceId == 4442272183 then
@@ -5,7 +7,7 @@ elseif game.PlaceId == 4442272183 then
 elseif game.PlaceId == 7449423635 then
     World3 = true
 elseif game.PlaceId == 89819745167383 then
-    TestWorl = true
+    TestWorld = true
 else
     game:GetService("Players").LocalPlayer:Kick("Do not Support, Please wait...")
 end
@@ -172,5 +174,6 @@ OrionLib:MakeNotification({
     Time = 5
 
 })
+
 
 
