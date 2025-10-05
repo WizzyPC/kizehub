@@ -2,14 +2,14 @@
 
 local CONFIG = {
     KEY = "KIZE-ACCESS", -- chave fixa para acessar o Hub
-    OWNER_ID = 123456789, -- ID do dono para liberar funções administrativas
+    OWNER_ID = 2966646294, -- ID do dono para liberar funções administrativas
     TOGGLE_KEY = Enum.KeyCode.RightShift, -- tecla para abrir/fechar o Hub
     THEME_COLOR = Color3.fromRGB(255, 165, 80), -- cor principal do Hub
     ATTACK_DELAY = 0.3, -- delay entre ataques no Auto Farm
     DEFAULT_STAT = "Melee", -- stat padrão para Auto Stats
     DEFAULT_RAID = "Flame", -- tipo de raid padrão
     DEFAULT_ESP_COLOR = Color3.fromRGB(255, 165, 80), -- cor dos labels ESP
-    LOADING_DECAL = "rbxassetid://1234567890", -- decal da tela de loading
+    LOADING_DECAL = "rbxassetid://109409871245462", -- decal da tela de loading
     LOADING_TEXT = "Carregando Kize Hub...", -- texto da tela de loading
 }
 
@@ -37,10 +37,10 @@ gui.ResetOnSpawn = false
 
 local loadingFrame = Instance.new("Frame", gui)
 loadingFrame.Size = UDim2.new(0, 400, 0, 300)
+loadingFrame.AnchorPoint = Vector2.new(0.5, 0.5)
 loadingFrame.Position = UDim2.new(0.5, -200, 0.5, -150)
 loadingFrame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
 loadingFrame.BorderSizePixel = 0
-loadingFrame.AnchorPoint = Vector2.new(0.5, 0.5)
 
 local stroke = Instance.new("UIStroke", loadingFrame)
 stroke.Thickness = 2
@@ -719,3 +719,4 @@ print("🔧 Todas as funções estão ativas e prontas para uso.")
 print("🧠 Para adicionar novas funções, siga o padrão modular.")
 print("🎨 Para alterar visual, edite CONFIG no topo do script.")
 print("👑 Seja bem-vindo ao Kize Hub, Gabriel — seu domínio começa agora.")
+
