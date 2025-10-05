@@ -166,6 +166,34 @@ startRaid.BorderColor3 = theme.accent
 startRaid.Font = Enum.Font.Gotham
 startRaid.TextScaled = true
 
+
+local UIS = game:GetService("UserInputService")
+
+-- Botão de minimizar
+local minimizeButton = Instance.new("TextButton", mainFrame)
+minimizeButton.Size = UDim2.new(0, 30, 0, 30)
+minimizeButton.Position = UDim2.new(1, -35, 0, 5)
+minimizeButton.Text = "-"
+minimizeButton.TextColor3 = theme.text
+minimizeButton.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+minimizeButton.BorderColor3 = theme.accent
+minimizeButton.Font = Enum.Font.GothamBold
+minimizeButton.TextScaled = true
+minimizeButton.Name = "MinimizeButton"
+
+-- Minimizar ao clicar
+minimizeButton.MouseButton1Click:Connect(function()
+    mainFrame.Visible = false
+end)
+
+-- Reabrir com RightShift
+UIS.InputBegan:Connect(function(input, gameProcessed)
+    if gameProcessed then return end
+    if input.KeyCode == Enum.KeyCode.RightShift then
+        mainFrame.Visible = not mainFrame.Visible
+    end
+end)
+
 OrionLib:Init()
 OrionLib:MakeNotification({
     Name = "Kize Hub | Blox Fruits [ BETA ]  By yKizera",
@@ -174,6 +202,7 @@ OrionLib:MakeNotification({
     Time = 5
 
 })
+
 
 
 
