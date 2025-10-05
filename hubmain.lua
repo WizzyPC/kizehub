@@ -2370,12 +2370,12 @@ local CamShake = require(game.ReplicatedStorage.Util.CameraShaker)
 CamShake:Stop()
 
     HttpService = game:GetService("HttpService")
-    local i = "Sla Hub"
+    local i = "Kize Hub | Blox Fruits [ BETA ]  By yKizera"
     local j = "-BloxFruit.json"
     local l = game.Players.LocalPlayer.Name .. j
     if Adel then
         HttpService = game:GetService("HttpService")
-        local i = "Sla Hub"
+        local i = "Kize Hub | Blox Fruits [ BETA ]  By yKizera"
         local j = "-BloxFruit.json"
         local l = game.Players.LocalPlayer.Name .. j
     end
@@ -2510,26 +2510,26 @@ CamShake:Stop()
     end
 
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
-local Window = OrionLib:MakeWindow({Name = "Sla Hub", HidePremium = false, IntroText = "", SaveConfig = true, ConfigFolder = "Sla Hub"})
+local Window = OrionLib:MakeWindow({Name = "Kize Hub | Blox Fruits [ BETA ]  By yKizera", HidePremium = false, IntroText = "", SaveConfig = true, ConfigFolder = "Kize Hub | Blox Fruits [ BETA ]  By yKizera"})
 
 OrionLib:MakeNotification({
-	Name = "Sla Hub",
+	Name = "Kize Hub | Blox Fruits [ BETA ]  By yKizera",
 	Content = "Choose Teams Bro?",
-	Image = "rbxassetid://119980140458596",
+	Image = "rbxassetid://109409871245462",
 	Time = 7
 })
 
 OrionLib:MakeNotification({
-	Name = "Sla Hub",
-	Content = "Sla Hub",
-	Image = "rbxassetid://119980140458596",
+	Name = "Kize Hub | Blox Fruits [ BETA ]  By yKizera",
+	Content = "Kize Hub | Blox Fruits [ BETA ]  By yKizera",
+	Image = "rbxassetid://109409871245462",
 	Time = 25
 })
 
 OrionLib:MakeNotification({
-    Name = "Sla Hub",
+    Name = "Kize Hub | Blox Fruits [ BETA ]  By yKizera",
     Content = "Please Wait loading script...,Do not enable any function",
-    Image = "rbxassetid://119980140458596",
+    Image = "rbxassetid://109409871245462",
     Time = 5
 })
 
@@ -2537,85 +2537,85 @@ OrionLib:MakeNotification({
 
 local W = Window:MakeTab({
     Name = "Welcome",
-    Icon = "rbxassetid://119980140458596",
+    Icon = "rbxassetid://109409871245462",
     PremiumOnly = false
 })
 
 local M = Window:MakeTab({
     Name = "General",
-    Icon = "rbxassetid://119980140458596",
+    Icon = "rbxassetid://109409871245462",
     PremiumOnly = false
 })
 
 local ST = Window:MakeTab({
     Name = "Setting",
-    Icon = "rbxassetid://119980140458596",
+    Icon = "rbxassetid://109409871245462",
     PremiumOnly = false
 })
 
 local IQ = Window:MakeTab({
     Name = "Item & Quest",
-    Icon = "rbxassetid://119980140458596",
+    Icon = "rbxassetid://109409871245462",
     PremiumOnly = false
 })
 
 local S = Window:MakeTab({
     Name = "Stats",
-    Icon = "rbxassetid://119980140458596",
+    Icon = "rbxassetid://109409871245462",
     PremiumOnly = false
 })
 
 local E = Window:MakeTab({
     Name = "ESP",
-    Icon = "rbxassetid://119980140458596",
+    Icon = "rbxassetid://109409871245462",
     PremiumOnly = false
 })
 
 local RA = Window:MakeTab({
     Name = "Raid",
-    Icon = "rbxassetid://119980140458596",
+    Icon = "rbxassetid://109409871245462",
     PremiumOnly = false
 })
 
 local LC = Window:MakeTab({
     Name = "Local Players",
-    Icon = "rbxassetid://119980140458596",
+    Icon = "rbxassetid://109409871245462",
     PremiumOnly = false
 })
 
 local Wld = Window:MakeTab({
     Name = "World Teleport",
-    Icon = "rbxassetid://119980140458596",
+    Icon = "rbxassetid://109409871245462",
     PremiumOnly = false
 })
 
 local SV = Window:MakeTab({
     Name = "Status Sever",
-    Icon = "rbxassetid://119980140458596",
+    Icon = "rbxassetid://109409871245462",
     PremiumOnly = false
 })
 
 local D = Window:MakeTab({
     Name = "Devil Fruit",
-    Icon = "rbxassetid://119980140458596",
+    Icon = "rbxassetid://109409871245462",
     PremiumOnly = false
 })
 
 local R = Window:MakeTab({
     Name = "Race V4",
-    Icon = "rbxassetid://119980140458596",
+    Icon = "rbxassetid://109409871245462",
     PremiumOnly = false
 })
 
 local SH = Window:MakeTab({
     Name = "Shop",
-    Icon = "rbxassetid://119980140458596",
+    Icon = "rbxassetid://109409871245462",
     PremiumOnly = false
 })
 
 local C = Window:MakeTab({
     Name = "Misc",
-    Icon = "rbxassetid://119980140458596",
+    Icon = "rbxassetid://109409871245462",
     PremiumOnly = false
 })
 
@@ -2624,7 +2624,7 @@ local Section = W:AddSection({
     Name = "Update"
 })
 
-W:AddLabel("[+] Sla Hub is HERE!")
+W:AddLabel("[+] Kize Hub | Blox Fruits [ BETA ]  By yKizera is HERE!")
 W:AddLabel("[+] Best AutoFarm!")
 W:AddLabel("[+] Up and Growing")
 W:AddLabel("[+] Smooth")
@@ -8337,15 +8337,15 @@ pcall(function()
         if _G.AutoEliteHunter then
             if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true then
                 OrionLib:MakeNotification({
-                    Name = "Sla Hub(Noitification)",
+                    Name = "Kize Hub | Blox Fruits [ BETA ]  By yKizera(Noitification)",
                     Content = "[EN] : Please cancel the farrm level quest (if any)",
-                    Image = "rbxassetid://119980140458596",
+                    Image = "rbxassetid://109409871245462",
                     Time = 9
                 })
                 OrionLib:MakeNotification({
-                    Name = "Sla Hub(Noitification)",
+                    Name = "Kize Hub | Blox Fruits [ BETA ]  By yKizera(Noitification)",
                     Content = "[VN] : Làm ơn hủy nhiệm vụ farrm level(nếu có)",
-                    Image = "rbxassetid://119980140458596",
+                    Image = "rbxassetid://109409871245462",
                     Time = 9
                 })
             end
@@ -8512,7 +8512,7 @@ spawn(function()
             if _G.AutoObservation then
                 if game:GetService("Players").LocalPlayer.VisionRadius.Value >= 3000 then
                     OrionLib:MakeNotification({
-                        Name = "Sla Hub BOT",
+                        Name = "Kize Hub | Blox Fruits [ BETA ]  By yKizera BOT",
                         Content = "!!You Are Max Point!!",
                         Image = "rbxassetid://14919714384",
                         Time = 5
@@ -8661,9 +8661,9 @@ spawn(function()
         if Mybeli <= 2500000 or MyFragment <= 5000 then
             wait(2.0)
             OrionLib:MakeNotification({
-                Name = "Sla Hub",
+                Name = "Kize Hub | Blox Fruits [ BETA ]  By yKizera",
                 Content = "You not have beli or fragment!",
-                Image = "rbxassetid://119980140458596",
+                Image = "rbxassetid://109409871245462",
                 Time = 5
             })
             end
@@ -8822,7 +8822,7 @@ spawn(function()
                         end
                     else
                         OrionLib:MakeNotification({
-                            Name = "Sla Hub BOT",
+                            Name = "Kize Hub | Blox Fruits [ BETA ]  By yKizera BOT",
                             Content = "Not Have Superhuman",
                             Image = "rbxassetid://14919714384",
                             Time = 5
@@ -8835,7 +8835,7 @@ spawn(function()
                         end
                     else
                         OrionLib:MakeNotification({
-                            Name = "Sla Hub BOT",
+                            Name = "Kize Hub | Blox Fruits [ BETA ]  By yKizera BOT",
                             Content = "Not Have Death Step",
                             Image = "rbxassetid://14919714384",
                             Time = 5
@@ -8848,7 +8848,7 @@ spawn(function()
                         end
                     else
                         OrionLib:MakeNotification({
-                            Name = "Sla Hub BOT",
+                            Name = "Kize Hub | Blox Fruits [ BETA ]  By yKizera BOT",
                             Content = "Not Have SharkMan Karate",
                             Image = "rbxassetid://14919714384",
                             Time = 5
@@ -8861,7 +8861,7 @@ spawn(function()
                         end
                     else
                         gOrionLib:MakeNotification({
-                            Name = "Sla Hub BOT",
+                            Name = "Kize Hub | Blox Fruits [ BETA ]  By yKizera BOT",
                             Content = "Not Have Electric Claw",
                             Image = "rbxassetid://14919714384",
                             Time = 5
@@ -8872,7 +8872,7 @@ spawn(function()
                         if game.Players.LocalPlayer.Backpack:FindFirstChild("Dragon Talon") and game.Players.LocalPlayer.Backpack:FindFirstChild("Dragon Talon").Level.Value >= 400 or game.Players.LocalPlayer.Character:FindFirstChild("Dragon Talon") and game.Players.LocalPlayer.Character:FindFirstChild("Dragon Talon").Level.Value >= 400 then
                             if string.find(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyGodhuman",true), "Bring") then
                                 OrionLib:MakeNotification({
-                                    Name = "Sla Hub BOT",
+                                    Name = "Kize Hub | Blox Fruits [ BETA ]  By yKizera BOT",
                                     Content = "Not Have Enough Material",
                                     Image = "rbxassetid://14919714384",
                                     Time = 5
@@ -8884,7 +8884,7 @@ spawn(function()
                         end
                     else
                         OrionLib:MakeNotification({
-                            Name = "Sla Hub BOT",
+                            Name = "Kize Hub | Blox Fruits [ BETA ]  By yKizera BOT",
                             Content = "You Not Have Dragon Talon! ",
                             Image = "rbxassetid://14919714384",
                             Time = 5
@@ -11283,33 +11283,33 @@ spawn(function()
             if game:GetService("Lighting").Sky.MoonTextureId=="http://www.roblox.com/asset/?id=9709149052" or game:GetService("Lighting").Sky.MoonTextureId=="http://www.roblox.com/asset/?id=9709149431" then
                 wait(2.0)
                 OrionLib:MakeNotification({
-                    Name = "Sla Hub",
+                    Name = "Kize Hub | Blox Fruits [ BETA ]  By yKizera",
                     Content = "Turn Off Hop Find Moon Please",
-                    Image = "rbxassetid://119980140458596",
+                    Image = "rbxassetid://109409871245462",
                     Time = 5
                 })
             elseif game:GetService("Lighting").Sky.MoonTextureId=="http://www.roblox.com/asset/?id=9709143733" then
                 Hop()
                 OrionLib:MakeNotification({
-                    Name = "Sla Hub",
+                    Name = "Kize Hub | Blox Fruits [ BETA ]  By yKizera",
                     Content = "Hop Server",
-                    Image = "rbxassetid://119980140458596",
+                    Image = "rbxassetid://109409871245462",
                     Time = 5
                 })
             elseif game:GetService("Lighting").Sky.MoonTextureId=="http://www.roblox.com/asset/?id=9709150401" then
                 Hop()
                 OrionLib:MakeNotification({
-                    Name = "Sla Hub",
+                    Name = "Kize Hub | Blox Fruits [ BETA ]  By yKizera",
                     Content = "Hop Server",
-                    Image = "rbxassetid://119980140458596",
+                    Image = "rbxassetid://109409871245462",
                     Time = 5
                 })
             elseif game:GetService("Lighting").Sky.MoonTextureId=="http://www.roblox.com/asset/?id=9709149680" then
                 Hop()
                 OrionLib:MakeNotification({
-                    Name = "Sla Hub",
+                    Name = "Kize Hub | Blox Fruits [ BETA ]  By yKizera",
                     Content = "Hop Server",
-                    Image = "rbxassetid://119980140458596",
+                    Image = "rbxassetid://109409871245462",
                     Time = 5
                 })
             else
@@ -11320,9 +11320,9 @@ spawn(function()
     end)
 
 OrionLib:MakeNotification({
-        Name = "Sla Hub",
+        Name = "Kize Hub | Blox Fruits [ BETA ]  By yKizera",
         Content = "Loading script complete!, You can now enable the function!",
-        Image = "rbxassetid://119980140458596",
+        Image = "rbxassetid://109409871245462",
         Time = 5
     })
 
@@ -11363,8 +11363,9 @@ end)
 OrionLib:Init()
 
 OrionLib:MakeNotification({
-    Name = "Sla Hub",
-    Content = "Loading Config Complete!!",
-    Image = "rbxassetid://119980140458596",
+    Name = "Kize Hub | Blox Fruits [ BETA ]  By yKizera",
+    Content = "Loading Config Complete!",
+    Image = "rbxassetid://109409871245462",
     Time = 5
+
 })
