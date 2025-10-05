@@ -1,3 +1,4 @@
+-- Identificação do mundo
 local World1, World2, World3, TestWorld = false, false, false, false
 
 if game.PlaceId == 2753915549 then
@@ -15,30 +16,31 @@ end
 -- Serviços
 local Players = game:GetService("Players")
 local player = Players.LocalPlayer
+local UIS = game:GetService("UserInputService")
+local HttpService = game:GetService("HttpService")
 
 -- Tela principal
 local screenGui = Instance.new("ScreenGui", player:WaitForChild("PlayerGui"))
 screenGui.Name = "Kize Hub | v0.1"
 screenGui.ResetOnSpawn = false
 
--- Tema
+-- Tema refinado
 local theme = {
     background = Color3.fromRGB(20, 20, 20),
-    accent = Color3.fromRGB(255, 165, 80), -- Laranja suave
+    accent = Color3.fromRGB(255, 165, 80),
     text = Color3.fromRGB(255, 255, 255),
     textSecondary = Color3.fromRGB(200, 200, 200),
     border = 5
 }
 
--- Função para criar frames com UIBorder
+-- Função para criar frames com borda moderna
 local function createFrame(parent, size, position)
     local frame = Instance.new("Frame", parent)
     frame.Size = size
     frame.Position = position
     frame.BackgroundColor3 = theme.background
-    frame.BorderSizePixel = 0 -- desativa borda padrão
+    frame.BorderSizePixel = 0
 
-    -- Borda visual moderna
     local border = Instance.new("UIStroke", frame)
     border.Thickness = 2
     border.Color = theme.accent
@@ -47,11 +49,12 @@ local function createFrame(parent, size, position)
     return frame
 end
 
-
 -- Hub principal
 local mainFrame = createFrame(screenGui, UDim2.new(0, 800, 0, 500), UDim2.new(0.5, -400, 0.5, -250))
 mainFrame.Name = "MainFrame"
-
+mainFrame.Active = true
+mainFrame.Draggable = true
+mainFrame.Selectable = true
 
 -- Sidebar
 local sidebar = createFrame(mainFrame, UDim2.new(0, 140, 1, 0), UDim2.new(0, 0, 0, 0))
@@ -68,7 +71,7 @@ title.Font = Enum.Font.GothamBold
 title.TextScaled = true
 
 -- Abas
-local tabs = {"Farming", "Player", "Teleport", "Raids", "Configs"}
+local tabs = {"Farming", "Player", "Teleport", "Raids", "Configs", "Admin"}
 local tabFrames = {}
 
 for i, tabName in ipairs(tabs) do
@@ -78,9 +81,13 @@ for i, tabName in ipairs(tabs) do
     button.Text = tabName
     button.TextColor3 = theme.text
     button.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-    button.BorderColor3 = theme.accent
     button.Font = Enum.Font.Gotham
     button.TextScaled = true
+
+    local stroke = Instance.new("UIStroke", button)
+    stroke.Thickness = 2
+    stroke.Color = theme.accent
+    stroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
 
     local tabFrame = createFrame(mainFrame, UDim2.new(1, -150, 1, -20), UDim2.new(0, 150, 0, 10))
     tabFrame.Visible = i == 1
@@ -92,110 +99,196 @@ for i, tabName in ipairs(tabs) do
     end)
 end
 
-local farmingFrame = tabFrames["Farming"]
+-- FARMING: Auto Farm Level
+local autoFarmEnabled = false
 
-local bonesButton = Instance.new("TextButton", farmingFrame)
-bonesButton.Size = UDim2.new(0, 200, 0, 40)
-bonesButton.Position = UDim2.new(0, 20, 0, 20)
-bonesButton.Text = "Farmar Bones"
-bonesButton.TextColor3 = theme.text
-bonesButton.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-bonesButton.BorderColor3 = theme.accent
-bonesButton.Font = Enum.Font.Gotham
-bonesButton.TextScaled = true
+local autoFarmToggle = Instance.new("TextButton", tabFrames["Farming"])
+autoFarmToggle.Size = UDim2.new(0, 200, 0, 40)
+autoFarmToggle.Position = UDim2.new(0, 20, 0, 80)
+autoFarmToggle.Text = "Auto Farm: OFF"
+autoFarmToggle.TextColor3 = theme.text
+autoFarmToggle.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+autoFarmToggle.Font = Enum.Font.Gotham
+autoFarmToggle.TextScaled = true
 
-local playerFrame = tabFrames["Player"]
+local strokeAF = Instance.new("UIStroke", autoFarmToggle)
+strokeAF.Thickness = 2
+strokeAF.Color = theme.accent
+strokeAF.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
 
-local statDropdown = Instance.new("TextBox", playerFrame)
-statDropdown.Size = UDim2.new(0, 200, 0, 40)
-statDropdown.Position = UDim2.new(0, 20, 0, 20)
-statDropdown.PlaceholderText = "Stat: Melee, Defense, etc"
-statDropdown.TextColor3 = theme.text
-statDropdown.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-statDropdown.BorderColor3 = theme.accent
-statDropdown.Font = Enum.Font.Gotham
-statDropdown.TextScaled = true
+autoFarmToggle.MouseButton1Click:Connect(function()
+    autoFarmEnabled = not autoFarmEnabled
+    autoFarmToggle.Text = autoFarmEnabled and "Auto Farm: ON" or "Auto Farm: OFF"
+end)
 
-local statAmount = Instance.new("TextBox", playerFrame)
-statAmount.Size = UDim2.new(0, 200, 0, 40)
-statAmount.Position = UDim2.new(0, 20, 0, 70)
-statAmount.PlaceholderText = "Quantidade"
-statAmount.TextColor3 = theme.text
-statAmount.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-statAmount.BorderColor3 = theme.accent
-statAmount.Font = Enum.Font.Gotham
-statAmount.TextScaled = true
+-- FARMING: Auto Boss Farm
+local bossFarmEnabled = false
 
-local applyStats = Instance.new("TextButton", playerFrame)
-applyStats.Size = UDim2.new(0, 200, 0, 40)
-applyStats.Position = UDim2.new(0, 20, 0, 120)
-applyStats.Text = "Aplicar"
-applyStats.TextColor3 = theme.text
-applyStats.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-applyStats.BorderColor3 = theme.accent
-applyStats.Font = Enum.Font.Gotham
-applyStats.TextScaled = true
+local bossFarmToggle = Instance.new("TextButton", tabFrames["Farming"])
+bossFarmToggle.Size = UDim2.new(0, 200, 0, 40)
+bossFarmToggle.Position = UDim2.new(0, 20, 0, 140)
+bossFarmToggle.Text = "Boss Farm: OFF"
+bossFarmToggle.TextColor3 = theme.text
+bossFarmToggle.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+bossFarmToggle.Font = Enum.Font.Gotham
+bossFarmToggle.TextScaled = true
 
-local teleportFrame = tabFrames["Teleport"]
-local seas = {"Sea 1", "Sea 2", "Sea 3"}
+local strokeBF = Instance.new("UIStroke", bossFarmToggle)
+strokeBF.Thickness = 2
+strokeBF.Color = theme.accent
+strokeBF.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
 
-for i, sea in ipairs(seas) do
-    local btn = Instance.new("TextButton", teleportFrame)
-    btn.Size = UDim2.new(0, 200, 0, 40)
-    btn.Position = UDim2.new(0, 20, 0, 20 + (i - 1) * 50)
-    btn.Text = sea
-    btn.TextColor3 = theme.text
-    btn.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-    btn.BorderColor3 = theme.accent
-    btn.Font = Enum.Font.Gotham
-    btn.TextScaled = true
+bossFarmToggle.MouseButton1Click:Connect(function()
+    bossFarmEnabled = not bossFarmEnabled
+    bossFarmToggle.Text = bossFarmEnabled and "Boss Farm: ON" or "Boss Farm: OFF"
+end)
+
+-- STATS: Auto Stats
+local autoStatsEnabled = false
+
+local autoStatsToggle = Instance.new("TextButton", tabFrames["Player"])
+autoStatsToggle.Size = UDim2.new(0, 200, 0, 40)
+autoStatsToggle.Position = UDim2.new(0, 20, 0, 180)
+autoStatsToggle.Text = "Auto Stats: OFF"
+autoStatsToggle.TextColor3 = theme.text
+autoStatsToggle.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+autoStatsToggle.Font = Enum.Font.Gotham
+autoStatsToggle.TextScaled = true
+
+local strokeAS = Instance.new("UIStroke", autoStatsToggle)
+strokeAS.Thickness = 2
+strokeAS.Color = theme.accent
+strokeAS.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+
+autoStatsToggle.MouseButton1Click:Connect(function()
+    autoStatsEnabled = not autoStatsEnabled
+    autoStatsToggle.Text = autoStatsEnabled and "Auto Stats: ON" or "Auto Stats: OFF"
+end)
+
+-- RAID: Auto Raid
+local autoRaidEnabled = false
+
+local autoRaidToggle = Instance.new("TextButton", tabFrames["Raids"])
+autoRaidToggle.Size = UDim2.new(0, 200, 0, 40)
+autoRaidToggle.Position = UDim2.new(0, 20, 0, 80)
+autoRaidToggle.Text = "Auto Raid: OFF"
+autoRaidToggle.TextColor3 = theme.text
+autoRaidToggle.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+autoRaidToggle.Font = Enum.Font.Gotham
+autoRaidToggle.TextScaled = true
+
+local strokeAR = Instance.new("UIStroke", autoRaidToggle)
+strokeAR.Thickness = 2
+strokeAR.Color = theme.accent
+strokeAR.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+
+autoRaidToggle.MouseButton1Click:Connect(function()
+    autoRaidEnabled = not autoRaidEnabled
+    autoRaidToggle.Text = autoRaidEnabled and "Auto Raid: ON" or "Auto Raid: OFF"
+end)
+
+-- ESP: Frutas e Mobs
+local espEnabled = false
+
+local espToggle = Instance.new("TextButton", tabFrames["Configs"])
+espToggle.Size = UDim2.new(0, 200, 0, 40)
+espToggle.Position = UDim2.new(0, 20, 0, 80)
+espToggle.Text = "ESP: OFF"
+espToggle.TextColor3 = theme.text
+espToggle.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+espToggle.Font = Enum.Font.Gotham
+espToggle.TextScaled = true
+
+local strokeESP = Instance.new("UIStroke", espToggle)
+strokeESP.Thickness = 2
+strokeESP.Color = theme.accent
+strokeESP.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+
+espToggle.MouseButton1Click:Connect(function()
+    espEnabled = not espEnabled
+    espToggle.Text = espEnabled and "ESP: ON" or "ESP: OFF"
+end)
+
+-- 🔐 Webhook para envio de keys
+local WebhookURL = "https://discord.com/api/webhooks/SEU_WEBHOOK_AQUI"
+
+local function sendKeyToDiscord(key, duration)
+    local data = {
+        ["content"] = "**Nova Key Gerada**\n🔑 Key: `" .. key .. "`\n⏳ Validade: " .. duration
+    }
+    HttpService:PostAsync(WebhookURL, HttpService:JSONEncode(data))
 end
 
-local configFrame = tabFrames["Configs"]
+local function generateKey(permanent)
+    local key = "KIZE-" .. math.random(100000,999999)
+    local duration = permanent and "Permanente" or "1 Dia"
+    sendKeyToDiscord(key, duration)
+end
 
-local toggleFPS = Instance.new("TextButton", configFrame)
-toggleFPS.Size = UDim2.new(0, 200, 0, 40)
-toggleFPS.Position = UDim2.new(0, 20, 0, 20)
-toggleFPS.Text = "Mostrar FPS"
-toggleFPS.TextColor3 = theme.text
-toggleFPS.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-toggleFPS.BorderColor3 = theme.accent
-toggleFPS.Font = Enum.Font.Gotham
-toggleFPS.TextScaled = true
+-- 👑 Aba Admin (visível apenas para o dono)
+local ownerId = 123456789 -- substitua pelo seu ID real
+if player.UserId == ownerId then
+    local adminFrame = tabFrames["Admin"]
+    adminFrame.Visible = false -- só aparece se clicar
 
-local raidFrame = tabFrames["Raids"]
+    local key1Day = Instance.new("TextButton", adminFrame)
+    key1Day.Size = UDim2.new(0, 200, 0, 40)
+    key1Day.Position = UDim2.new(0, 20, 0, 20)
+    key1Day.Text = "Gerar Key (1 Dia)"
+    key1Day.TextColor3 = theme.text
+    key1Day.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+    key1Day.Font = Enum.Font.Gotham
+    key1Day.TextScaled = true
 
-local startRaid = Instance.new("TextButton", raidFrame)
-startRaid.Size = UDim2.new(0, 200, 0, 40)
-startRaid.Position = UDim2.new(0, 20, 0, 20)
-startRaid.Text = "Iniciar Raid"
-startRaid.TextColor3 = theme.text
-startRaid.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-startRaid.BorderColor3 = theme.accent
-startRaid.Font = Enum.Font.Gotham
-startRaid.TextScaled = true
+    local strokeK1 = Instance.new("UIStroke", key1Day)
+    strokeK1.Thickness = 2
+    strokeK1.Color = theme.accent
+    strokeK1.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
 
+    key1Day.MouseButton1Click:Connect(function()
+        generateKey(false)
+    end)
 
-local UIS = game:GetService("UserInputService")
+    local keyPermanent = Instance.new("TextButton", adminFrame)
+    keyPermanent.Size = UDim2.new(0, 200, 0, 40)
+    keyPermanent.Position = UDim2.new(0, 20, 0, 80)
+    keyPermanent.Text = "Gerar Key (Permanente)"
+    keyPermanent.TextColor3 = theme.text
+    keyPermanent.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+    keyPermanent.Font = Enum.Font.Gotham
+    keyPermanent.TextScaled = true
 
--- Botão de minimizar
+    local strokeKP = Instance.new("UIStroke", keyPermanent)
+    strokeKP.Thickness = 2
+    strokeKP.Color = theme.accent
+    strokeKP.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+
+    keyPermanent.MouseButton1Click:Connect(function()
+        generateKey(true)
+    end)
+else
+    tabFrames["Admin"].Visible = false
+end
+
+-- 🔽 Minimizar e reabrir com RightShift
 local minimizeButton = Instance.new("TextButton", mainFrame)
 minimizeButton.Size = UDim2.new(0, 30, 0, 30)
 minimizeButton.Position = UDim2.new(1, -35, 0, 5)
 minimizeButton.Text = "-"
 minimizeButton.TextColor3 = theme.text
 minimizeButton.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-minimizeButton.BorderColor3 = theme.accent
 minimizeButton.Font = Enum.Font.GothamBold
 minimizeButton.TextScaled = true
-minimizeButton.Name = "MinimizeButton"
 
--- Minimizar ao clicar
+local strokeMin = Instance.new("UIStroke", minimizeButton)
+strokeMin.Thickness = 2
+strokeMin.Color = theme.accent
+strokeMin.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+
 minimizeButton.MouseButton1Click:Connect(function()
     mainFrame.Visible = false
 end)
 
--- Reabrir com RightShift
 UIS.InputBegan:Connect(function(input, gameProcessed)
     if gameProcessed then return end
     if input.KeyCode == Enum.KeyCode.RightShift then
@@ -203,19 +296,31 @@ UIS.InputBegan:Connect(function(input, gameProcessed)
     end
 end)
 
-OrionLib:Init()
-OrionLib:MakeNotification({
-    Name = "Kize Hub | Blox Fruits [ BETA ]  By yKizera",
-    Content = "Loading Config Complete!",
-    Image = "rbxassetid://109409871245462",
-    Time = 5
+-- ✅ Dica: substitua pelo seu ID real para ativar a aba Admin
+-- local ownerId = 123456789
 
-})
+-- ✅ Dica: substitua pelo seu Webhook real do Discord
+-- local WebhookURL = "https://discord.com/api/webhooks/SEU_WEBHOOK_AQUI"
 
+-- ✅ Dica: para adicionar mais funções, siga o padrão:
+-- 1. Crie um botão na aba desejada
+-- 2. Adicione UIStroke para borda
+-- 3. Conecte a função com MouseButton1Click
+-- 4. Use spawn(function() ... end) para loops
 
+-- ✅ Dica: para proteger o Hub com sistema de key, você pode:
+-- - Criar uma tela de login inicial
+-- - Validar a key digitada com HttpService:GetAsync() em um servidor
+-- - Liberar o Hub apenas se a key for válida
 
+-- ✅ Dica: para deixar o Hub ainda mais bonito:
+-- - Adicione UIGradient nos botões
+-- - Use imagens com ImageLabel para ícones
+-- - Adicione animações com TweenService
 
+-- ✅ Dica: para empacotar como loader:
+-- - Hospede o script no GitHub ou Pastebin
+-- - Use loadstring(game:HttpGet("URL"))() no Xeno
 
-
-
-
+-- ✅ Finalização
+print("Kize Hub v0.1 carregado com sucesso!")
