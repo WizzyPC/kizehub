@@ -28,7 +28,6 @@ local theme = {
     text = Color3.fromRGB(255, 255, 255),
     textSecondary = Color3.fromRGB(200, 200, 200),
     border = 5
-    stroke = 2
 }
 
 -- Função para criar frames com UIBorder
@@ -41,7 +40,7 @@ local function createFrame(parent, size, position)
 
     -- Borda visual moderna
     local border = Instance.new("UIStroke", frame)
-    border.Thickness = stroke
+    border.Thickness = 2
     border.Color = theme.accent
     border.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
 
@@ -245,6 +244,7 @@ OrionLib:MakeNotification({
     Time = 5
 
 })
+
 
 
 
