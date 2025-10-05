@@ -170,6 +170,11 @@ for i, tabName in ipairs(tabs) do
     tabFrame.BorderSizePixel = 0
     tabFrame.Visible = i == 1
 
+    local layout = Instance.new("UIListLayout", tabFrame)
+    layout.Padding = UDim.new(0, 10)
+    layout.SortOrder = Enum.SortOrder.LayoutOrder
+
+
     local frameStroke = Instance.new("UIStroke", tabFrame)
     frameStroke.Thickness = 2
     frameStroke.Color = CONFIG.THEME_COLOR
@@ -719,4 +724,5 @@ print("🔧 Todas as funções estão ativas e prontas para uso.")
 print("🧠 Para adicionar novas funções, siga o padrão modular.")
 print("🎨 Para alterar visual, edite CONFIG no topo do script.")
 print("👑 Seja bem-vindo ao Kize Hub, Gabriel — seu domínio começa agora.")
+
 
