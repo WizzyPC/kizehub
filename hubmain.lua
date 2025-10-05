@@ -73,8 +73,8 @@ local tabFrames = {}
 
 for i, tabName in ipairs(tabs) do
     local button = Instance.new("TextButton", sidebar)
-    button.Size = UDim2.new(1, -20, 0, 40)
-    button.Position = UDim2.new(0, 20, 0, 70 + (i - 1) * 55) button.Size = UDim2.new(1, -40, 0, 45)
+    button.Size = UDim2.new(1, -40, 0, 45)
+    button.Position = UDim2.new(0, 20, 0, 70 + (i - 1) * 55)
     button.Text = tabName
     button.TextColor3 = theme.text
     button.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
@@ -211,6 +211,7 @@ OrionLib:MakeNotification({
     Time = 5
 
 })
+
 
 
 
