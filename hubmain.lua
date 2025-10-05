@@ -18,31 +18,74 @@ local player = Players.LocalPlayer
 
 -- Tela principal
 local screenGui = Instance.new("ScreenGui", player:WaitForChild("PlayerGui"))
-screenGui.Name = "Kize Hub | Blox Fruits [ BETA ]  By yKizera"
+screenGui.Name = "Kize Hub | v0.1"
 screenGui.ResetOnSpawn = false
 
 -- Tema
 local theme = {
     background = Color3.fromRGB(20, 20, 20),
-    accent = Color3.fromRGB(255, 120, 0),
-    text = Color3.fromRGB(230, 230, 230),
-    border = 2
+    accent = Color3.fromRGB(255, 165, 80), -- Laranja suave
+    text = Color3.fromRGB(255, 255, 255),
+    textSecondary = Color3.fromRGB(200, 200, 200),
+    border = 5
+    stroke = 2
 }
 
--- Função para criar frames com borda
+-- Função para criar frames com UIBorder
 local function createFrame(parent, size, position)
     local frame = Instance.new("Frame", parent)
     frame.Size = size
     frame.Position = position
     frame.BackgroundColor3 = theme.background
-    frame.BorderSizePixel = theme.border
-    frame.BorderColor3 = theme.accent
+    frame.BorderSizePixel = 0 -- desativa borda padrão
+
+    -- Borda visual moderna
+    local border = Instance.new("UIStroke", frame)
+    border.Thickness = stroke
+    border.Color = theme.accent
+    border.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+
     return frame
 end
 
+
 -- Hub principal
-local mainFrame = createFrame(screenGui, UDim2.new(0, 700, 0, 400), UDim2.new(0.5, -350, 0.5, -200))
+local mainFrame = createFrame(screenGui, UDim2.new(0, 800, 0, 500), UDim2.new(0.5, -400, 0.5, -250))
 mainFrame.Name = "MainFrame"
+
+local dragging = false
+local dragInput, dragStart, startPos
+
+mainFrame.Active = true
+mainFrame.Draggable = true -- Ativa movimentação
+mainFrame.Selectable = true
+
+-- Alternativa com controle manual (caso queira mais precisão)
+mainFrame.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        dragging = true
+        dragStart = input.Position
+        startPos = mainFrame.Position
+        input.Changed:Connect(function()
+            if input.UserInputState == Enum.UserInputState.End then
+                dragging = false
+            end
+        end)
+    end
+end)
+
+mainFrame.InputChanged:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseMovement then
+        dragInput = input
+    end
+end)
+
+UIS.InputChanged:Connect(function(input)
+    if input == dragInput and dragging then
+        local delta = input.Position - dragStart
+        mainFrame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+    end
+end)
 
 -- Sidebar
 local sidebar = createFrame(mainFrame, UDim2.new(0, 140, 1, 0), UDim2.new(0, 0, 0, 0))
@@ -52,7 +95,7 @@ sidebar.Name = "Sidebar"
 local title = Instance.new("TextLabel", sidebar)
 title.Size = UDim2.new(1, 0, 0, 50)
 title.Position = UDim2.new(0, 0, 0, 0)
-title.Text = "Kize Hub | Blox Fruits [ BETA ]  By yKizera"
+title.Text = "Kize Hub | v0.1"
 title.TextColor3 = theme.text
 title.BackgroundTransparency = 1
 title.Font = Enum.Font.GothamBold
@@ -65,7 +108,7 @@ local tabFrames = {}
 for i, tabName in ipairs(tabs) do
     local button = Instance.new("TextButton", sidebar)
     button.Size = UDim2.new(1, -20, 0, 40)
-    button.Position = UDim2.new(0, 10, 0, 60 + (i - 1) * 45)
+    button.Position = UDim2.new(0, 20, 0, 70 + (i - 1) * 55) button.Size = UDim2.new(1, -40, 0, 45)
     button.Text = tabName
     button.TextColor3 = theme.text
     button.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
@@ -202,6 +245,7 @@ OrionLib:MakeNotification({
     Time = 5
 
 })
+
 
 
 
