@@ -210,7 +210,7 @@ espToggle.MouseButton1Click:Connect(function()
 end)
 
 -- 🔐 Webhook para envio de keys
-local WebhookURL = "https://discord.com/api/webhooks/SEU_WEBHOOK_AQUI"
+local WebhookURL = "https://discord.com/api/webhooks/1424429444327674100/1AHbpGgWxHkcr1_2s7AP2-QTMfSudk3dUi26xKLl_jO5qjzOFEKv-Jl7fONhWZa3_7bJ" 
 
 local function sendKeyToDiscord(key, duration)
     local data = {
@@ -226,7 +226,7 @@ local function generateKey(permanent)
 end
 
 -- 👑 Aba Admin (visível apenas para o dono)
-local ownerId = 123456789 -- substitua pelo seu ID real
+local ownerId = 2966646294 -- substitua pelo seu ID real
 if player.UserId == ownerId then
     local adminFrame = tabFrames["Admin"]
     adminFrame.Visible = false -- só aparece se clicar
@@ -324,3 +324,4 @@ end)
 
 -- ✅ Finalização
 print("Kize Hub v0.1 carregado com sucesso!")
+
