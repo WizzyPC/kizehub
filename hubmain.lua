@@ -52,39 +52,6 @@ end
 local mainFrame = createFrame(screenGui, UDim2.new(0, 800, 0, 500), UDim2.new(0.5, -400, 0.5, -250))
 mainFrame.Name = "MainFrame"
 
-local dragging = false
-local dragInput, dragStart, startPos
-
-mainFrame.Active = true
-mainFrame.Draggable = true -- Ativa movimentação
-mainFrame.Selectable = true
-
--- Alternativa com controle manual (caso queira mais precisão)
-mainFrame.InputBegan:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseButton1 then
-        dragging = true
-        dragStart = input.Position
-        startPos = mainFrame.Position
-        input.Changed:Connect(function()
-            if input.UserInputState == Enum.UserInputState.End then
-                dragging = false
-            end
-        end)
-    end
-end)
-
-mainFrame.InputChanged:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseMovement then
-        dragInput = input
-    end
-end)
-
-UIS.InputChanged:Connect(function(input)
-    if input == dragInput and dragging then
-        local delta = input.Position - dragStart
-        mainFrame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
-    end
-end)
 
 -- Sidebar
 local sidebar = createFrame(mainFrame, UDim2.new(0, 140, 1, 0), UDim2.new(0, 0, 0, 0))
@@ -244,6 +211,7 @@ OrionLib:MakeNotification({
     Time = 5
 
 })
+
 
 
 
