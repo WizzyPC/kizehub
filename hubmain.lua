@@ -2312,8 +2312,14 @@ function TweenTempleLegit()
     end)
 
 function GetBladeHit()
-    local CombatFrameworkLib = debug.getupvalues(require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework))
-    local CmrFwLib = CombatFrameworkLib[2]
+    local CmrFwLib = nil
+	for _, v in pairs(getgc(true)) do
+	    if typeof(v) == "table" and rawget(v, "activeController") then
+	        CmrFwLib = v
+	        break
+	    end
+	end
+
     local p13 = CmrFwLib.activeController
     local weapon = p13.blades[1]
     if not weapon then 
@@ -2325,8 +2331,14 @@ function GetBladeHit()
     return weapon
 end
 function AttackHit()
-    local CombatFrameworkLib = debug.getupvalues(require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework))
-    local CmrFwLib = CombatFrameworkLib[2]
+   local CmrFwLib = nil
+	for _, v in pairs(getgc(true)) do
+	    if typeof(v) == "table" and rawget(v, "activeController") then
+	        CmrFwLib = v
+	        break
+	    end
+	end
+
     local plr = game.Players.LocalPlayer
     for i = 1, 1 do
         local bladehit = require(game.ReplicatedStorage.CombatFramework.RigLib).getBladeHits(plr.Character,{plr.Character.HumanoidRootPart},60)
@@ -7515,8 +7527,13 @@ spawn(function()
 end)
 
 function GetBladeHit()
-    local CombatFrameworkLib = debug.getupvalues(require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework))
-    local CmrFwLib = CombatFrameworkLib[2]
+    local CmrFwLib = nil
+	for _, v in pairs(getgc(true)) do
+	    if typeof(v) == "table" and rawget(v, "activeController") then
+	        CmrFwLib = v
+	        break
+	    end
+	end
     local p13 = CmrFwLib.activeController
     local weapon = p13.blades[1]
     if not weapon then 
@@ -7528,8 +7545,14 @@ function GetBladeHit()
     return weapon
 end
 function AttackHit()
-    local CombatFrameworkLib = debug.getupvalues(require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework))
-    local CmrFwLib = CombatFrameworkLib[2]
+    local CmrFwLib = nil
+	for _, v in pairs(getgc(true)) do
+	    if typeof(v) == "table" and rawget(v, "activeController") then
+	        CmrFwLib = v
+	        break
+	    end
+	end
+
     local plr = game.Players.LocalPlayer
     for i = 1, 1 do
         local bladehit = require(game.ReplicatedStorage.CombatFramework.RigLib).getBladeHits(plr.Character,{plr.Character.HumanoidRootPart},60)
@@ -11369,3 +11392,4 @@ OrionLib:MakeNotification({
     Time = 5
 
 })
+
